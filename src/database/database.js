@@ -2,8 +2,8 @@ import { Sequelize } from "sequelize";
 
 export const sequalize = new Sequelize(
     'postgres',
-    'postgres',
-    'android2.2',
+    'tu usuario  postgres',
+    'tu contraseña usuario postgres',
     {
         host:'localhost',
         dialect:'postgres',
