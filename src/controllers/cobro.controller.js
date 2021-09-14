@@ -27,9 +27,9 @@ export async function createCobro(req, res) {
 
 export async function getCobro(req, res) {
     try {
-        const cobros = await Cobro.findAll();
+        const cobro = await Cobro.findAll();
         res.json({
-            data: cobros
+            data: cobro
         });
     } catch (error) {
         console.log(error);
