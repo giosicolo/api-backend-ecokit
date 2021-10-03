@@ -3,7 +3,7 @@ import { Sequelize } from "sequelize";
 export const sequalize = new Sequelize(
     'ecokitCyV',
     'postgres',
-    'android2.2',
+    'postgres',
     {
         host:'localhost',
         dialect:'postgres',

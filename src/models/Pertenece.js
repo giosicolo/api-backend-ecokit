@@ -1,5 +1,7 @@
 import  Sequelize  from "sequelize";
 import  {sequalize, sequelize}  from "../database/database";
+import Alquiler from "./Alquiler";
+import Planta from "./Planta";
 
 
 const Pertenece = sequalize.define('pertenece',{
@@ -19,8 +21,17 @@ const Pertenece = sequalize.define('pertenece',{
     alquiler_id: {
         type: Sequelize.INTEGER,
     }
+},{
+    timestamps: false,
+    freezeTableName: true,
+    tableName: 'pertenece'
 });
 
 //Falta agregar Relaciones
+
+
+Pertenece.hasOne(Alquiler, {foreignKey: 'alquiler_id', sourceKey: 'alquiler_id'});
+Alquiler.belongsTo(Pertenece, {foreignKey: 'alquiler_id', sourceKey: 'alquiler_id'});
+Pertenece.hasOne(Planta, {foreignKey: 'planta_id', sourceKey: 'planta_id'});
 
 export default Pertenece;

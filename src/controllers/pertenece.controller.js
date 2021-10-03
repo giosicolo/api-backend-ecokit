@@ -1,4 +1,6 @@
+import Alquiler from '../models/Alquiler';
 import Pertenece from '../models/Pertenece';
+import Planta from '../models/Planta';
 
 
 export async function createPertenece(req, res) {
@@ -29,8 +31,8 @@ export async function createPertenece(req, res) {
 };
 
 
-/*
-PORQUE LISTARIA TODOS LAS PLANTAS ALQUILADAS SIN PEDIR UN CLIENTE 
+
+//PORQUE LISTARIA TODOS LAS PLANTAS ALQUILADAS SIN PEDIR UN CLIENTE 
 
 export async function getPertenece(req, res) {
     try {
@@ -42,9 +44,28 @@ export async function getPertenece(req, res) {
         console.log(error);
     }
 };
-*/
 
+export async function getPerteneceConAlquiler(req, res) {
+    try {
+        const pertenecen = await Pertenece.findAll({ include: Alquiler });
+        res.json({
+            data: pertenecen
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
 
+export async function getPerteneceConAlquileryPlanta(req, res) {
+    try {
+        const pertenecen = await Pertenece.findAll({include: Alquiler, include: Planta});
+        res.json({
+            data: pertenecen
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 /*
 

@@ -1,6 +1,10 @@
 import  Sequelize  from "sequelize";
 import  {sequalize, sequelize}  from "../database/database";
 
+import Yacimiento from "./yacimiento";
+import Remito from "./remito";
+import Alquiler from "./alquiler";
+
 
 const Empresa = sequalize.define('empresa',{
     empresa_id : {
@@ -21,6 +25,15 @@ const Empresa = sequalize.define('empresa',{
     }
 });
 
-//Falta agregar Relacion con yacimeinto
+Yacimiento.belongsTo(Empresa, {foreignKey: 'razon_social_id', sourceKey: 'razon_social_id'});
+Empresa.hasMany(Yacimiento,{foreignKey: 'empresa_id', sourceKey: 'empresa_id'});
+
+Remito.belongsTo(Empresa, {foreignKey: 'empresa_id', sourceKey: 'empresa_id'});
+Empresa.hasMany(Remito,{foreignKey: 'empresa_id', sourceKey: 'empresa_id'});
+
+Alquiler.belongsTo(Alquiler, {foreignKey: 'empresa_id', sourceKey: 'empresa_id'});
+Empresa.hasMany(Alquiler,{foreignKey: 'empresa_id', sourceKey: 'empresa_id'});
+
+
 
 export default Empresa;

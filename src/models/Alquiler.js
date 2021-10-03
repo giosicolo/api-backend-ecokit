@@ -23,6 +23,10 @@ const Alquiler = sequalize.define('alquiler',{
         type: Sequelize.INTEGER,
     }
 
+},{
+    timestamps: false,
+    freezeTableName: true,
+    tableName: 'alquiler'
 });
 
 //Falta agregar Relaciones

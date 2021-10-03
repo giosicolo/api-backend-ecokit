@@ -20,7 +20,7 @@ export async function createAlquiler(req, res) {
             });
         }
     } catch (error) {
-        console.log(e);
+        console.log(error);
         res.status(500).json({
             message: 'Something goes wrong',
             data: {}
@@ -64,7 +64,7 @@ export async function deleteAlquiler(req, res) {
         }
     });
     res.json({
-        message: 'Project eliminado satisfactoriamente'
+        message: 'Alquiler eliminado satisfactoriamente'
     })
 }
 
@@ -90,7 +90,7 @@ export async function updateAlquiler(req, res) {
     };
 
     return res.json({
-        message: 'Proyecto actualizado correctamente',
+        message: 'Alquiler actualizado correctamente',
         data: alquiler
     });
 }

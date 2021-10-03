@@ -25,6 +25,10 @@ const Remito = sequalize.define('remito',{
     alquiler_id: {
         type: Sequelize.INTEGER,
     }
+},{
+    timestamps: false,
+    freezeTableName: true,
+    tableName: 'remito'
 });
 
 //Falta agregar Relacion con yacimeinto

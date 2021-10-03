@@ -19,6 +19,10 @@ const Servicio_extra = sequalize.define('servicio_extra',{
     remito_id:{
         type: Sequelize.INTEGER,
     }
+},{
+    timestamps: false,
+    freezeTableName: true,
+    tableName: 'servicio_extra'
 });
 
 //Falta agregar Relacion con yacimeinto

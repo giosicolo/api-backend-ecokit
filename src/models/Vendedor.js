@@ -18,6 +18,10 @@ const Vendedor = sequalize.define('vendedor',{
     },
     telefono:{
         type: Sequelize.TEXT,
-    }});
+    }},{
+        timestamps: false,
+        freezeTableName: true,
+        tableName: 'vendedor'
+    });
 
 export default Vendedor;
