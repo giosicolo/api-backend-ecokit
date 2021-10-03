@@ -21,6 +21,9 @@ const Remito = sequalize.define('remito',{
     },
     empresa_id: {
         type: Sequelize.INTEGER,
+    },
+    alquiler_id: {
+        type: Sequelize.INTEGER,
     }
 });
 

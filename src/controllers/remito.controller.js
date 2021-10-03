@@ -69,7 +69,7 @@ export async function deleteRemito(req, res) {
     })
 }
 
-export async function AsignarCobroRemito(req, res) {
+export async function asignarCobroRemito(req, res) {
     const { remito_id } = req.params;
     const { cobro_id } = req.body;
 
@@ -87,7 +87,7 @@ export async function AsignarCobroRemito(req, res) {
     };
 
     return res.json({
-        message: 'Cobro asignado a correctamente',
+        message: 'Cobro asignado a Remito correctamente',
         data: alquiler
     });
 }

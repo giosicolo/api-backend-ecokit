@@ -1,22 +1,21 @@
-import Cobro from '../models/Cobro';
-import Servicio from '../models/Servicio_extra';
+import Pertenece from '../models/Pertenece';
 
 
-export async function createServicio_extra(req, res) {
-    const { fecha, monto, descripcion , remito_id } = req.body;
+export async function createPertenece(req, res) {
+    const { fecha_inicio, fecha_fin, alquiler_id, planta_id } = req.body;
     try {
-        let newServicio = await Servicio.create({ 
-            fecha,
-            monto,
-            descripcion,
-            remito_id
+        let newPertenece = await Pertenece.create({ 
+            fecha_inicio,
+            fecha_fin,
+            alquiler_id,
+            planta_id
         }, {
-            fields: [ 'fecha', 'monto', 'descripcion' , 'remito_id' ]
+            fields: [ 'fecha_inicio', 'fecha_fin', 'alquiler_id' , 'planta_id' ]
         })
-        if (newServicio) {
+        if (newPertenece) {
             return res.json({
-                message: 'servicio_extra created successfully',
-                data: newServicio
+                message: 'relacion entre alquiler y planta created successfully',
+                data: newPertenece
             });
         }
     } catch (error) {
@@ -29,16 +28,27 @@ export async function createServicio_extra(req, res) {
 
 };
 
-export async function getServicio_extra(req, res) {
+
+/*
+PORQUE LISTARIA TODOS LAS PLANTAS ALQUILADAS SIN PEDIR UN CLIENTE 
+
+export async function getPertenece(req, res) {
     try {
-        const servicios = await Servicio.findAll();
+        const pertenecen = await Pertenece.findAll();
         res.json({
-            data: servicios
+            data: pertenecen
         });
     } catch (error) {
         console.log(error);
     }
 };
+*/
+
+
+
+/*
+
+REVISAR SI TIENEN UTILIDAD
 
 export async function getOneServicio_extra(req, res) {
     try {
@@ -68,3 +78,4 @@ export async function deleteServicio_extra(req, res) {
     })
 }
 
+*/

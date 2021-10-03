@@ -15,6 +15,9 @@ const Servicio_extra = sequalize.define('servicio_extra',{
     },
     descripcion:{
         type: Sequelize.TEXT,
+    },
+    remito_id:{
+        type: Sequelize.INTEGER,
     }
 });
 

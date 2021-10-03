@@ -10,6 +10,10 @@ const Cobro = sequalize.define('cobro',{
     fecha:{
         type: Sequelize.DATE,
     }
+},{
+    timestamps: false,
+    freezeTableName: true,
+    tableName: 'cobro'
 });
 
 //Falta agregar Relacion con yacimeinto
