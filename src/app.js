@@ -10,6 +10,7 @@ import cobroRoutes from './routes/cobro';
 import remitoRoutes from './routes/remito';
 import perteneceRoutes from './routes/pertenece';
 import servicio_extraRoutes from './routes/servicio_extra';
+import registrarServicioExtra from './routes/registrarServicioExtra';
 
 const app = express();
 
@@ -26,4 +27,5 @@ app.use('/api/cobro',cobroRoutes);
 app.use('/api/remito',remitoRoutes);
 app.use('/api/pertenece', perteneceRoutes);
 app.use('/api/servicio_extra', servicio_extraRoutes);
+app.use('/api/registrarServicioExtra',registrarServicioExtra);
 export default app;
