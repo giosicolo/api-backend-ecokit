@@ -19,9 +19,7 @@ const Remito = sequalize.define('remito',{
     cobro_id: {
         type: Sequelize.INTEGER,
     },
-    empresa_id: {
-        type: Sequelize.INTEGER,
-    },
+    
     alquiler_id: {
         type: Sequelize.INTEGER,
     }

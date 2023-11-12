@@ -162,3 +162,17 @@ export async function getServiciosAndMantenimientosByRemito(req, res) {
 
 
 
+export async function getAllRemitos(req, res) {
+    try {
+        const remitos = await Remito.findAll();
+        res.json({
+            data: remitos
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: 'Something went wrong',
+            data: {}
+        });
+    }
+}

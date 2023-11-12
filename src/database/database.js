@@ -5,10 +5,11 @@ export const sequalize = new Sequelize(
     //usuario
     'postgres',
     //pass
-    'postgres',
+    'fp',
     {
         host:'localhost',
         dialect:'postgres',
+        port: 5433, 
         pool:{
             max: 5,
             min: 0,

@@ -127,6 +127,31 @@ export async function getAlquileresVigentes(req, res) {
     
 };
 
+
+
+export async function getAlquileresVigentesSinEmpresa(req, res) {
+    const {empresa_id } = req.params;
+
+       const alquileres = await Alquiler.findAll({
+  
+        });
+
+        if(alquileres.length){
+            return res.status(200).json({
+                message: 'Alquileres Vigentes encontrados',
+                data: alquileres
+            });
+        }else{
+            return res.status(500).json({
+                message: 'NO Existen Alquileres vigentes',
+                data: null
+            });       
+         }
+    
+};
+
+
+
 export async function verificarRemitoDuplicado(req, res) {
     const { alquiler_id, fecha_ingresada } = req.params;
 

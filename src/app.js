@@ -48,8 +48,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use(cors({origin: 'http://localhost:4200'}));
-app.use(cors({origin: 'http://localhost:5173'}));
+app.use(cors({ origin: ['http://localhost:4200', 'http://localhost:5173'], credentials: true }));
 
 
 
