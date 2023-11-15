@@ -68,7 +68,7 @@ export async function deleteUbicacion(req, res) {
 
 export async function updateUbicacion(req, res) {
     const { nombre_id } = req.params;
-    const { nombre_id, latitud,longitud,comentarios } = req.body;
+    const {  latitud,longitud,comentarios } = req.body;
 
     const ubicacion = await Ubicacion.findAll({
         attributes: ['nombre_id', 'latitud','longitud','comentarios'],
