@@ -3,16 +3,17 @@ import Remito from '../models/Remito';
 
 
 export async function createRemito(req, res) {
-    const { monto, conformidad,fecha,empresa_id,alquiler_id } = req.body;
+    const { monto, conformidad,fecha,empresa_id,alquiler_id, detalle } = req.body;
     try {
         let newRemito = await Remito.create({
             monto,
             conformidad,
+            detalle,
             fecha,
             empresa_id,
             alquiler_id
         }, {
-            fields: [ 'monto', 'conformidad' , 'fecha' , 'empresa_id' , ' alquiler_id']
+            fields: [ 'monto', 'conformidad','detalle' , 'fecha' , 'empresa_id' , ' alquiler_id']
         })
         if (newRemito) {
             return res.json({
@@ -44,6 +45,7 @@ export async function getRemito(req, res) {
 export async function getOneRemito(req, res) {
     try {
         const { remito_id } = req.params;
+        console.log(remito_id);
         const remito = await Remito.findOne({
             where: {
                 remito_id

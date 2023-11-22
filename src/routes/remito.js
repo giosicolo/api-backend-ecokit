@@ -8,7 +8,7 @@ import { getAlquileresVigentes,verificarRemitoDuplicado, getMantenimientosYServi
 router.post('/', createRemito);
 router.get('/', getRemito);
 router.get('/all', getAllRemitos);
-router.get('/: remito_id' , getOneRemito);
+router.get('/:remito_id' , getOneRemito);
 router.delete('/:remito_id'  , deleteRemito);
 router.put('/:remito_id',asignarCobroRemito);
 

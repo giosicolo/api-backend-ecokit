@@ -13,6 +13,9 @@ const Remito = sequalize.define('remito',{
     conformidad:{
         type: Sequelize.BOOLEAN,
     },
+    detalle:{
+        type: Sequelize.STRING,
+    },
     fecha:{
         type: Sequelize.DATE,
     },
