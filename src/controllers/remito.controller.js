@@ -4,6 +4,11 @@ import Remito from '../models/Remito';
 
 export async function createRemito(req, res) {
     const { monto, conformidad,fecha,empresa_id,alquiler_id, detalle } = req.body;
+
+   
+    console.log("Alquiler id: "+alquiler_id);
+    //parsear alquilere_id a int
+    const alquiler_id_int = parseInt(alquiler_id);
     try {
         let newRemito = await Remito.create({
             monto,
@@ -11,9 +16,9 @@ export async function createRemito(req, res) {
             detalle,
             fecha,
             empresa_id,
-            alquiler_id
+            alquiler_id: alquiler_id_int
         }, {
-            fields: [ 'monto', 'conformidad','detalle' , 'fecha' , 'empresa_id' , ' alquiler_id']
+            fields: [ 'monto', 'conformidad','detalle' , 'fecha' , 'empresa_id' , 'alquiler_id']
         })
         if (newRemito) {
             return res.json({
