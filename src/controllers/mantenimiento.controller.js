@@ -1,98 +1,72 @@
-import Mantenimiento from '../models/Mantenimiento';
-import Planta from '../models/Planta';
+const Mantenimiento = require('../models/Mantenimiento');
 
-export async function createMantenimiento(req, res) {
-    const { mantenimiento_id,fecha,duracion,observaciones,hora,alquiler_id,planta_id } = req.body;
-    try {
-        let newMantenimiento = await Mantenimiento.create({
-            mantenimiento_id,
-            fecha,duracion,
-            observaciones,
-            hora,
-            alquiler_id,
-            planta_id 
-        }, {
-            fields: ['mantenimiento_id','fecha','duracion','observaciones','hora','alquiler_id','planta_id' ]
-        })
-        if (newMantenimiento) {
-            return res.json({
-                message: 'Mantenimiento created successfully',
-                data: newMantenimiento
-            });
-        }
-    } catch (error) {
-        console.log(e);
-        res.status(500).json({
-            message: 'Something goes wrong',
-            data: {}
-        });
-    }
-
+const obtenerTodosLosMantenimientos = async (req, res) => {
+  try {
+    const mantenimientos = await Mantenimiento.findAll();
+    res.json(mantenimientos);
+  } catch (error) {
+    console.error('Error al obtener todos los mantenimientos:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
 };
 
-export async function getMantenimientos(req, res) {
-    try {
-        const mantenimientos = await Mantenimiento.findAll({include: Planta});
-        res.json({
-            data: mantenimientos
-        });
-    } catch (error) {
-        console.log(error);
+const obtenerMantenimientoPorId = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const mantenimiento = await Mantenimiento.findByPk(id);
+    if (mantenimiento) {
+      res.json(mantenimiento);
+    } else {
+      res.status(404).json({ error: 'Mantenimiento no encontrado' });
     }
+  } catch (error) {
+    console.error('Error al obtener el mantenimiento por ID:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
 };
 
-export async function getOneMantenimiento(req, res) {
-    try {
-        const { mantenimiento_id } = req.params;
-        const mantenimiento = await Mantenimiento.findOne({
-            where: {
-                mantenimiento_id
-            }
-        });
-        res.json({
-            data: mantenimiento
-        });
-    } catch (error) {
-        console.log(error);
+const crearMantenimiento = async (req, res) => {
+  const nuevoMantenimiento = req.body;
+
+  try {
+
+    console.log(nuevoMantenimiento);
+
+    if(!nuevoMantenimiento.fecha || !nuevoMantenimiento.alquiler 
+        || !nuevoMantenimiento.tipoMantenimiento || !nuevoMantenimiento.planta || !nuevoMantenimiento.usuario){
+        res.status(400).json({ error: 'Faltan datos' });
+        return;
     }
+
+
+    const mantenimientoCreado = await Mantenimiento.create(nuevoMantenimiento);
+    res.status(201).json(mantenimientoCreado);
+  } catch (error) {
+    console.error('Error al crear el mantenimiento:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
 };
 
-export async function deleteMantenimiento(req, res) {
-    const { mantenimiento_id } = req.params;
-    const deleteRowCount = await Mantenimiento.destroy({
-        where: {
-            mantenimiento_id
-        }
+const borrarMantenimientoPorId = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const resultado = await Mantenimiento.destroy({
+      where: { id },
     });
-    res.json({
-        message: 'Mantenimiento eliminado satisfactoriamente'
-    })
-}
+    if (resultado === 1) {
+      res.json({ mensaje: 'Mantenimiento eliminado exitosamente' });
+    } else {
+      res.status(404).json({ error: 'Mantenimiento no encontrado' });
+    }
+  } catch (error) {
+    console.error('Error al eliminar el mantenimiento por ID:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+};
 
-export async function updateMantenimiento(req, res) {
-    const { mantenimiento_id } = req.params;
-    const {fecha,duracion,observaciones,hora,alquiler_id,planta_id } = req.body;
-
-    const mantenimiento = await Mantenimiento.findAll({
-        attributes: [ 'mantenimiento_id','fecha','duracion','observaciones','hora','alquiler_id','planta_id'],
-        where: { mantenimiento_id }
-    });
-
-    if (mantenimiento.length) {
-        mantenimiento.forEach(async empresa => {
-            await empresa.update({
-                fecha,
-                duracion,
-                observaciones,
-                hora,
-                alquiler_id,
-                planta_id 
-            })
-        });
-    };
-
-    return res.json({
-        message: 'Mantenimiento actualizado correctamente',
-        data: project
-    });
-}
+module.exports = {
+  obtenerTodosLosMantenimientos,
+  obtenerMantenimientoPorId,
+  crearMantenimiento,
+  borrarMantenimientoPorId,
+};

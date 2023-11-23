@@ -1,12 +1,13 @@
-import { Router } from "express";
-const router = Router();
+const express = require('express');
+const router = express.Router();
+const mantenimientoController = require('../controllers/mantenimiento.controller');
 
-import { createMantenimiento, deleteMantenimiento , getMantenimientos , getOneMantenimiento, updateMantenimiento} from "../controllers/mantenimiento.controller";
+router.get('/mantenimientos', mantenimientoController.obtenerTodosLosMantenimientos);
 
-router.post('/',createMantenimiento );
-router.get('/', getMantenimientos);
-router.get('/:mantenimiento_id' , getOneMantenimiento);
-router.delete('/:mantenimiento_id'  , deleteMantenimiento);
-router.put('/:mantenimiento_id',updateMantenimiento);
+router.get('/mantenimientos/:id', mantenimientoController.obtenerMantenimientoPorId);
 
-export default router;
+router.post('/mantenimientos', mantenimientoController.crearMantenimiento);
+
+router.delete('/mantenimientos/:id', mantenimientoController.borrarMantenimientoPorId);
+
+module.exports = router;
